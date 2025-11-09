@@ -1,11 +1,10 @@
-import React from "react";
+import Starfield from "./components/Starfield";
 
 function App() {
   return (
-    <div className="min-h-screen bg-blue-500 flex items-center justify-center">
-      <h1 className="text-white text-3xl font-bold">
-        Tailwind is working! 🎉
-      </h1>
+    <div className="fixed w-screen h-screen bg-midnight text-white flex items-center justify-center font-sans">
+      <Starfield/>
+      <h1 className="text-4xl font-serif"></h1>
     </div>
   );
 }
