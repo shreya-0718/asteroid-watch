@@ -2,12 +2,15 @@ import React from 'react'
 
 const AsteroidCard = ({asteroid}) => {
 
+  if (!asteroid) return null;
+
   const name = asteroid.name;
+  const approach = asteroid.close_approach_data?.[0];
   const diameter = asteroid.estimated_diameter.kilometers.estimated_diameter_max.toFixed(2);
   const speed = parseFloat(approach.relative_velocity.kilometers_per_hour).toFixed(0);
-  const date = asteroid.close_approach_data[0].approach.close_approach_date;
-  const hazard = asteroid.is_potentially_hazardous.asteroid;
-  const impacy = asteroid.is_sentry_object;
+  const date = approach.close_approach_date;
+  const hazard = asteroid.is_potentially_hazardous_asteroid;
+  const impact = asteroid.is_sentry_object;
 
   return (
     <div>
