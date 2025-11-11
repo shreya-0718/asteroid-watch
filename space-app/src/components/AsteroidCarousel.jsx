@@ -1,7 +1,7 @@
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import React, { useState } from 'react';
 import AsteroidCard from './AsteroidCard';
+import React, { useState, useEffect } from 'react';
 
 const responsive = {
   desktop: {
@@ -11,17 +11,27 @@ const responsive = {
   },
 };
 
+const apiKey = import.meta.env.VITE_NASA_API_KEY;
+
 const auto = false;
 
 function AsteroidCarousel() {
 
     const current = new Date();
-    // takes it in YYYY-MM-DD
-    const date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDay()}`;
+    // this gives it in YYYY-MM-DD
+    const today = current.toISOString().split('T')[0];
 
-    const [asteroids, setAsteroids] = useState()
+    const threeDaysAgo = new Date(current);
+    threeDaysAgo.setDate(current.getDate() - 3);
+    const pastDate = threeDaysAgo.toISOString().split('T')[0];
+
+    const threeDaysAhead = new Date(current);
+    threeDaysAhead.setDate(current.getDate() + 3);
+    const futureDate = threeDaysAhead.toISOString().split('T')[0];
+    
+    const [asteroids, setAsteroids] = useState([])
     useEffect(() => {
-        fetch('https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=DEMO_KEY')
+        fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${pastDate}&end_date=${futureDate}&api_key=${apiKey}`)
         .then((res) => res.json())
         .then((data) => {
         const allAsteroids = Object.values(data.near_earth_objects).flat();
@@ -47,9 +57,15 @@ function AsteroidCarousel() {
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
       >
-        {asteroids.map((asteroid) => (
-            <AsteroidCard asteroid={asteroid} />
-        ))}
+
+        {(Array.isArray(asteroids) && asteroids.length > 0) ? (
+        asteroids.map((asteroid) => (
+            <AsteroidCard key={asteroid.id} asteroid={asteroid} />
+        ))) : 
+        (
+        <div className="text-center p-10">Loading asteroids…</div>
+        )}
+
 
       </Carousel>
     </div>
