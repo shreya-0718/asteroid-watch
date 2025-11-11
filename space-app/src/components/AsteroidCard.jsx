@@ -13,8 +13,9 @@ const AsteroidCard = ({asteroid}) => {
   const impact = asteroid.is_sentry_object;
 
   return (
-    <div>
+    <div className="bg-white bg-opacity-10 p-6 border border-white min-h-48">
       <h1> hello there!</h1>
+      <h1>  Diameter: {diameter} km </h1>
     </div>
   )
 }
