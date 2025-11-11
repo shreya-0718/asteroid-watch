@@ -1,6 +1,7 @@
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import React from 'react';
+import React, { useState } from 'react';
+import AsteroidCard from './AsteroidCard';
 
 const responsive = {
   desktop: {
@@ -13,6 +14,21 @@ const responsive = {
 const auto = false;
 
 function AsteroidCarousel() {
+
+    const current = new Date();
+    // takes it in YYYY-MM-DD
+    const date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDay()}`;
+
+    const [asteroids, setAsteroids] = useState()
+    useEffect(() => {
+        fetch('https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=DEMO_KEY')
+        .then((res) => res.json())
+        .then((data) => {
+        const allAsteroids = Object.values(data.near_earth_objects).flat();
+        setAsteroids(allAsteroids);
+        });
+    }, []);
+
   return (
     <div className="h-auto">
       <Carousel
@@ -31,10 +47,10 @@ function AsteroidCarousel() {
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
       >
-        <div className="p-10 bg-white text-black">Item 1</div>
-        <div className="p-10 bg-white text-black">Item 2</div>
-        <div className="p-10 bg-white text-black">Item 6</div>
-        <div className="p-10 bg-white text-black">Item 7</div>
+        {asteroids.map((asteroid) => (
+            <AsteroidCard asteroid={asteroid} />
+        ))}
+
       </Carousel>
     </div>
   );
