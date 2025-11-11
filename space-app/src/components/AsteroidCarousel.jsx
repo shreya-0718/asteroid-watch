@@ -3,7 +3,7 @@ import 'react-multi-carousel/lib/styles.css';
 import React from 'react';
 
 const responsive = {
-  all: {
+  desktop: {
     breakpoint: { max: 3000, min: 0 },
     items: 1,
     slidesToSlide: 1,
@@ -12,9 +12,9 @@ const responsive = {
 
 const auto = false;
 
-function AsteroidCarousel({  }) {
+function AsteroidCarousel() {
   return (
-    <div>
+    <div className="h-auto">
       <Carousel
         swipeable={true}
         draggable={false}
@@ -32,9 +32,9 @@ function AsteroidCarousel({  }) {
         itemClass="carousel-item-padding-40-px"
       >
         <div className="p-10 bg-white text-black">Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-        <div>Item 4</div>
+        <div className="p-10 bg-white text-black">Item 2</div>
+        <div className="p-10 bg-white text-black">Item 6</div>
+        <div className="p-10 bg-white text-black">Item 7</div>
       </Carousel>
     </div>
   );
