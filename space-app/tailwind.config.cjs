@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         midnight: "#1a1a2e",
         blush: "#d98da4ff",
+        violet: "#e175dcff",
       },
     },
   },

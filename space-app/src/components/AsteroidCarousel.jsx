@@ -21,17 +21,13 @@ function AsteroidCarousel() {
     // this gives it in YYYY-MM-DD
     const today = current.toISOString().split('T')[0];
 
-    const threeDaysAgo = new Date(current);
-    threeDaysAgo.setDate(current.getDate() - 3);
-    const pastDate = threeDaysAgo.toISOString().split('T')[0];
-
-    const threeDaysAhead = new Date(current);
-    threeDaysAhead.setDate(current.getDate() + 3);
-    const futureDate = threeDaysAhead.toISOString().split('T')[0];
+    const nextDay = new Date(current);
+    nextDay.setDate(current.getDate() + 1);
+    const tomorrow = nextDay.toISOString().split('T')[0];
     
     const [asteroids, setAsteroids] = useState([])
     useEffect(() => {
-        fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${pastDate}&end_date=${futureDate}&api_key=${apiKey}`)
+        fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${today}&end_date=${tomorrow}&api_key=${apiKey}`)
         .then((res) => res.json())
         .then((data) => {
         const allAsteroids = Object.values(data.near_earth_objects).flat();
