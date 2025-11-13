@@ -36,7 +36,7 @@ function AsteroidCarousel() {
   }, []);
 
   return (
-    <div className="flex-1 w-full h-full flex items-stretch justify-center bg-violet">
+    <div className="flex-1 w-full max-w-3xl h-full flex items-stretch justify-center">
       <Carousel
         className="flex-1 w-full h-full"
         swipeable

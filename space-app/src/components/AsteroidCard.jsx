@@ -12,8 +12,8 @@ const AsteroidCard = ({ asteroid }) => {
   const url = asteroid.nasa_jpl_url;
 
   return (
-    <div className="w-full h-full flex items-stretch justify-center bg-blush">
-      <div className="h-full w-full max-w-2xl flex flex-col justify-center bg-white bg-opacity-10 p-6 rounded-2xl border border-white overflow-y-auto">
+    <div className="w-full h-full flex items-stretch justify-center">
+      <div className="h-full w-full max-w-[70vw] xl:max-w-xl flex flex-col justify-center bg-white bg-opacity-10 p-6 rounded-2xl border border-white overflow-y-auto">
         <h2 className="text-2xl font-bold mb-4">{name}</h2>
         <p>🪐 Diameter: {diameter} km</p>
         <p>📅 Approach Date: {date}</p>

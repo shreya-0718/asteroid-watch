@@ -12,7 +12,7 @@ function App() {
           <h1 className="text-4xl font-serif text-center">Asteroid Watcher</h1>
         </div>
 
-       <div className="flex-grow flex bg-red-500 items-stretch justify-center w-full max-w-6xl mx-auto h-[calc(100vh-100rem)] max-h-[400px]">
+       <div className="flex-grow flex items-stretch justify-center w-full max-w-6xl mx-auto h-[calc(100vh-100rem)] max-h-[400px]">
           <AsteroidCarousel />
         </div>
 
