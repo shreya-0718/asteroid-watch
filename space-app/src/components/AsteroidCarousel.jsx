@@ -36,8 +36,9 @@ function AsteroidCarousel() {
     }, []);
 
   return (
-    <div className="h-auto">
+    <div className="flex-1 w-full flex items-center justify-center bg-violet">
       <Carousel
+        className="flex-1 w-full"
         swipeable={true}
         draggable={false}
         showDots={true}
@@ -49,10 +50,9 @@ function AsteroidCarousel() {
         keyBoardControl={true}
         customTransition="all .5"
         transitionDuration={500}
-        containerClass="carousel-container"
+        containerClass="carousel-container w-full h-full"
         dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px"
-      >
+        itemClass="carousel-item-padding-40-px bg-blue-500"      >
 
         {(Array.isArray(asteroids) && asteroids.length > 0) ? (
         asteroids.map((asteroid) => (

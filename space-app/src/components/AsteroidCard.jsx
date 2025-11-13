@@ -15,14 +15,13 @@ const AsteroidCard = ({asteroid}) => {
 
   return (
     <>
-      <div className = "flex justify-center">
-        <div className="mb-8 bg-white bg-opacity-10 p-6 rounded-2xl border border-white min-h-96 min-w-96">
-          <h3 className="text-xl font-bold mb-2">Asteroid {name}</h3>
+      <div className="min-h-96 w-full h-full flex items-center justify-center bg-blush">
+        <div className="w-full max-w-2xl h-full flex flex-col justify-center bg-white bg-opacity-10 p-6 rounded-2xl border border-white">
           <p>🪐 Diameter: {diameter} km</p>
           <p>📅 Approach Date: {date}</p>
           <p>🚀 Speed: {speed} km/h</p>
           <p>{hazard ? "🚨 Potentially Hazardous ⚠️" : ""}</p>
-          <p> ✨ More info: <a href={url} target="_blank" rel="noopener noreferrer" className="text-violet" style={{textShadow: "0 0 5px rgba(255, 255, 255, 0.3)"}}>here :3</a></p>
+          <p> ✨ More info <a href={url} target="_blank" rel="noopener noreferrer" className="text-violet font-bold" style={{textShadow: "0 0 5px rgba(255, 255, 255, 0.3)"}}>here :3</a></p>
         </div>
       </div>
     </>
