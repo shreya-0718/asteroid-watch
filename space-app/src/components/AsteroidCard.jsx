@@ -1,7 +1,6 @@
 import React from 'react'
 
-const AsteroidCard = ({asteroid}) => {
-
+const AsteroidCard = ({ asteroid }) => {
   if (!asteroid) return null;
 
   const name = asteroid.name;
@@ -10,24 +9,32 @@ const AsteroidCard = ({asteroid}) => {
   const speed = parseFloat(approach.relative_velocity.kilometers_per_hour).toFixed(0);
   const date = approach.close_approach_date;
   const hazard = asteroid.is_potentially_hazardous_asteroid;
-  const impact = asteroid.is_sentry_object;
-  const url = (asteroid.nasa_jpl_url);
+  const url = asteroid.nasa_jpl_url;
 
   return (
-    <>
-      <div className="min-h-96 w-full h-full flex items-center justify-center bg-blush">
-        <div className="w-full max-w-2xl h-full flex flex-col justify-center bg-white bg-opacity-10 p-6 rounded-2xl border border-white">
-          <p>🪐 Diameter: {diameter} km</p>
-          <p>📅 Approach Date: {date}</p>
-          <p>🚀 Speed: {speed} km/h</p>
-          <p>{hazard ? "🚨 Potentially Hazardous ⚠️" : ""}</p>
-          <p> ✨ More info <a href={url} target="_blank" rel="noopener noreferrer" className="text-violet font-bold" style={{textShadow: "0 0 5px rgba(255, 255, 255, 0.3)"}}>here :3</a></p>
-        </div>
+    <div className="w-full h-full flex items-stretch justify-center bg-blush">
+      <div className="h-full w-full max-w-2xl flex flex-col justify-center bg-white bg-opacity-10 p-6 rounded-2xl border border-white overflow-y-auto">
+        <h2 className="text-2xl font-bold mb-4">{name}</h2>
+        <p>🪐 Diameter: {diameter} km</p>
+        <p>📅 Approach Date: {date}</p>
+        <p>🚀 Speed: {speed} km/h</p>
+        {hazard && <p>🚨 Potentially Hazardous ⚠️</p>}
+        <p> 
+          ✨ More info{" "}
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-violet font-bold"
+            style={{ textShadow: "0 0 5px rgba(255, 255, 255, 0.3)" }}
+          >here :3</a>
+           
+        </p>
       </div>
-    </>
-    
-  )
+    </div>
+  );
 }
+
 
 export default AsteroidCard
 

@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.carousel-container,
+.react-multi-carousel-track,
+.react-multi-carousel-item {
+  height: 100% !important;
+}
