@@ -1,6 +1,7 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import AsteroidCard from "./AsteroidCard";
+import CustomDots from "./CustomDots"
 import React, { useState, useEffect } from "react";
 
 const responsive = {
@@ -40,6 +41,7 @@ function AsteroidCarousel() {
       <Carousel
         className="flex-1 w-full h-full"
         swipeable
+        customDot={<CustomDots/>}
         draggable={false}
         showDots
         responsive={responsive}
@@ -50,7 +52,7 @@ function AsteroidCarousel() {
         customTransition="all .5"
         transitionDuration={500}
         containerClass="carousel-container w-full h-full"
-        dotListClass="custom-dot-list-style"
+        dotListClass="flex mb-4"
         itemClass="carousel-item h-full flex items-stretch justify-center"
       >
         {Array.isArray(asteroids) && asteroids.length > 0 ? (
