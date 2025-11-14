@@ -1,14 +1,10 @@
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useRef, useEffect } from 'react';
-import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import React from "react";
-
 
 function AsteroidMesh({ diameter, hazard }) {
   const mesh = useRef();
-
   const color = hazard ? 'orange' : 'gray';
   const scale = Math.min(Math.max(diameter / 2, 0.5), 2);
 
@@ -21,10 +17,10 @@ function AsteroidMesh({ diameter, hazard }) {
 
   useEffect(() => {
     if (mesh.current) {
-      console.log(`*** Updating asteroid: diameter=${diameter}, hazard=${hazard}`);
       mesh.current.material.color.set(color);
       mesh.current.scale.setScalar(scale);
     }
+    console.log("asteroid mounted!");
   }, [diameter, hazard]);
 
   return (
@@ -35,15 +31,13 @@ function AsteroidMesh({ diameter, hazard }) {
   );
 }
 
-const Asteroid = React.memo(function Asteroid({ diameter, hazard }) {
+export default function Asteroid({ diameter, hazard }) {
   return (
-    <Canvas style={{ height: '200px' }} className="w-full">
+    <Canvas style={{ width: '100%', height: '100%' }}>
       <ambientLight intensity={0.5} />
       <directionalLight position={[2, 2, 2]} />
       <AsteroidMesh diameter={diameter} hazard={hazard} />
       <OrbitControls enableZoom={false} />
     </Canvas>
   );
-}, () => true);
-
-export default Asteroid;
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Asteroid from './Asteroid';
 
-const AsteroidCard = ({ asteroid, isActive }) => {
+const AsteroidCard = ({ asteroid, isActive, slideIndex}) => {
 
   if (!asteroid) return null;
 
@@ -15,25 +15,27 @@ const AsteroidCard = ({ asteroid, isActive }) => {
 
   return (
     <div className="w-full h-full flex items-stretch justify-center">
-      <div className="h-full w-full max-w-[50vw] xl:max-w-xl flex flex-col justify-center bg-white bg-opacity-10 p-6 rounded-2xl border border-white overflow-y-auto">
-        <h2 className="text-2xl font-bold mb-4">{name}</h2>
-        <p>🪐 Diameter: {diameter} km</p>
-        <p>📅 Approach Date: {date}</p>
-        <p>🚀 Speed: {speed} km/h</p>
-        {hazard && <p>🚨 Potentially Hazardous ⚠️</p>}
-        <p>
-          ✨ More info{" "}
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-violet font-bold"
-            style={{ textShadow: "0 0 5px rgba(255, 255, 255, 0.3)" }}
-          >
-            here :3
-          </a>
-        </p>
-      </div>
+      <div className="h-full w-full max-w-[50vw] xl:max-w-xl flex flex-col md:flex-row justify-center bg-white bg-opacity-10 p-6 rounded-2xl border border-white overflow-y-auto">
+        <div>
+          <h2 className="text-2xl font-bold mb-4">{name}</h2>
+          <p>🪐 Diameter: {diameter} km</p>
+          <p>📅 Approach Date: {date}</p>
+          <p>🚀 Speed: {speed} km/h</p>
+          {hazard && <p>🚨 Potentially Hazardous ⚠️</p>}
+          <p>
+            ✨ More info{" "}
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-violet font-bold"
+              style={{ textShadow: "0 0 5px rgba(255, 255, 255, 0.3)" }}
+            >
+              here :3
+            </a>
+          </p>
+        </div>
+        </div>
     </div>
   );
 };

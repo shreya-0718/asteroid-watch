@@ -4,6 +4,7 @@ import AsteroidCard from "./AsteroidCard";
 import CustomDots from "./CustomDots"
 import React, { useState, useEffect } from "react";
 import Asteroid from "./Asteroid";
+import AsteroidPortal from "./AsteroidPortal";
 
 const responsive = {
   desktop: {
@@ -44,17 +45,10 @@ function AsteroidCarousel() {
   );
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center w-full max-w-3xl h-full">
-      <div className="w-full max-h-[250px] min-h-[150px] bg-blush">
-        <Asteroid
-          diameter={diameter}
-          hazard={asteroids[currentSlide]?.is_potentially_hazardous_asteroid}
-        />
-      </div>
-
+    <div className="flex flex-col md:flex-row items-stretch gap-4 w-full max-w-3xl">
       <Carousel
         beforeChange={(previousSlide, nextSlide) => setCurrentSlide(nextSlide)}
-        className="flex-1 w-full h-full"
+        className="flex-1"
         swipeable
         customDot={<CustomDots/>}
         draggable={false}
@@ -79,6 +73,14 @@ function AsteroidCarousel() {
         )}
       </Carousel>
 
+      <div className="w-full flex justify-center mt-4">
+        <div
+          id="asteroid-slot"
+          className="w-[200px] h-[200px] relative overflow-hidden bg-blush rounded-xl"
+        />
+      </div>
+
+      <AsteroidPortal/>
     </div>
   );
 }
