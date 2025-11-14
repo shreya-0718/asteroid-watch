@@ -39,8 +39,23 @@ function AsteroidCarousel() {
       });
   }, []);
 
+  const diameter = Number(
+    asteroids[currentSlide]?.estimated_diameter?.kilometers?.estimated_diameter_max || 1
+  );
+
   return (
-    <div className="flex-1 w-full max-w-3xl h-full flex items-stretch justify-center">
+    <div className="flex-1 flex flex-col items-center justify-center w-full max-w-3xl h-full">
+      <div className="w-full max-h-[250px] min-h-[150px] bg-blush">
+        {asteroids[currentSlide] &&
+          asteroids[currentSlide].estimated_diameter?.kilometers?.estimated_diameter_max && (
+            <Asteroid
+              diameter={diameter}
+              hazard={asteroids[currentSlide].is_potentially_hazardous_asteroid}
+            />
+        )}
+      </div>
+
+      
       <Carousel
         beforeChange={(previousSlide, nextSlide) => setCurrentSlide(nextSlide)}
         className="flex-1 w-full h-full"
@@ -67,11 +82,6 @@ function AsteroidCarousel() {
           <div className="text-center p-10">Loading asteroids…</div>
         )}
       </Carousel>
-
-      <Asteroid
-        diameter={parseFloat(asteroids[currentSlide]?.estimated_diameter.kilometers.estimated_diameter_max)}
-        hazard={asteroids[currentSlide]?.is_potentially_hazardous_asteroid}
-      />
 
     </div>
   );
