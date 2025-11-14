@@ -46,16 +46,12 @@ function AsteroidCarousel() {
   return (
     <div className="flex-1 flex flex-col items-center justify-center w-full max-w-3xl h-full">
       <div className="w-full max-h-[250px] min-h-[150px] bg-blush">
-        {asteroids[currentSlide] &&
-          asteroids[currentSlide].estimated_diameter?.kilometers?.estimated_diameter_max && (
-            <Asteroid
-              diameter={diameter}
-              hazard={asteroids[currentSlide].is_potentially_hazardous_asteroid}
-            />
-        )}
+        <Asteroid
+          diameter={diameter}
+          hazard={asteroids[currentSlide]?.is_potentially_hazardous_asteroid}
+        />
       </div>
 
-      
       <Carousel
         beforeChange={(previousSlide, nextSlide) => setCurrentSlide(nextSlide)}
         className="flex-1 w-full h-full"

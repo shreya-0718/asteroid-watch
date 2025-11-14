@@ -1,11 +1,16 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { useRef, useEffect, useMemo } from 'react';
+import { useRef, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import React from "react";
+
 
 function AsteroidMesh({ diameter, hazard }) {
   const mesh = useRef();
+
+  const color = hazard ? 'orange' : 'gray';
+  const scale = Math.min(Math.max(diameter / 2, 0.5), 2);
 
   useFrame(() => {
     if (mesh.current) {
@@ -15,21 +20,22 @@ function AsteroidMesh({ diameter, hazard }) {
   });
 
   useEffect(() => {
-    console.log(`New asteroid mesh: diameter=${diameter}, hazard=${hazard}`);
+    if (mesh.current) {
+      console.log(`*** Updating asteroid: diameter=${diameter}, hazard=${hazard}`);
+      mesh.current.material.color.set(color);
+      mesh.current.scale.setScalar(scale);
+    }
   }, [diameter, hazard]);
 
-  const color = hazard ? 'orange' : 'gray';
-  const scale = Math.min(Math.max(diameter / 2, 0.5), 2);
-
-  const geometry = useMemo(() => new THREE.IcosahedronGeometry(1, 0), [diameter]);
-  const material = useMemo(() => new THREE.MeshStandardMaterial({ color }), [color]);
-
   return (
-    <mesh ref={mesh} scale={scale} geometry={geometry} material={material} />
+    <mesh ref={mesh}>
+      <icosahedronGeometry args={[1, 0]} />
+      <meshStandardMaterial color={color} />
+    </mesh>
   );
 }
 
-export default function Asteroid({ diameter, hazard }) {
+const Asteroid = React.memo(function Asteroid({ diameter, hazard }) {
   return (
     <Canvas style={{ height: '200px' }} className="w-full">
       <ambientLight intensity={0.5} />
@@ -38,4 +44,6 @@ export default function Asteroid({ diameter, hazard }) {
       <OrbitControls enableZoom={false} />
     </Canvas>
   );
-}
+}, () => true);
+
+export default Asteroid;
