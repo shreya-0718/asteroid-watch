@@ -3,6 +3,7 @@ import "react-multi-carousel/lib/styles.css";
 import AsteroidCard from "./AsteroidCard";
 import CustomDots from "./CustomDots"
 import React, { useState, useEffect } from "react";
+import Asteroid from "./Asteroid";
 
 const responsive = {
   desktop: {
@@ -25,6 +26,8 @@ function AsteroidCarousel() {
 
   const [asteroids, setAsteroids] = useState([]);
 
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   useEffect(() => {
     fetch(
       `https://api.nasa.gov/neo/rest/v1/feed?start_date=${today}&end_date=${tomorrow}&api_key=${apiKey}`
@@ -39,6 +42,7 @@ function AsteroidCarousel() {
   return (
     <div className="flex-1 w-full max-w-3xl h-full flex items-stretch justify-center">
       <Carousel
+        beforeChange={(previousSlide, nextSlide) => setCurrentSlide(nextSlide)}
         className="flex-1 w-full h-full"
         swipeable
         customDot={<CustomDots/>}
@@ -56,13 +60,19 @@ function AsteroidCarousel() {
         itemClass="carousel-item h-full flex items-stretch justify-center"
       >
         {Array.isArray(asteroids) && asteroids.length > 0 ? (
-          asteroids.map((asteroid) => (
-            <AsteroidCard key={asteroid.id} asteroid={asteroid} />
+          asteroids.map((asteroid, index) => (
+            <AsteroidCard key={asteroid.id} asteroid={asteroid} isActive={index == currentSlide} slideIndex={index} />
           ))
         ) : (
           <div className="text-center p-10">Loading asteroids…</div>
         )}
       </Carousel>
+
+      <Asteroid
+        diameter={parseFloat(asteroids[currentSlide]?.estimated_diameter.kilometers.estimated_diameter_max)}
+        hazard={asteroids[currentSlide]?.is_potentially_hazardous_asteroid}
+      />
+
     </div>
   );
 }

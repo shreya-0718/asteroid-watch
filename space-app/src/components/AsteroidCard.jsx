@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import Asteroid from './Asteroid';
 
-const AsteroidCard = ({ asteroid }) => {
+const AsteroidCard = ({ asteroid, isActive }) => {
+
   if (!asteroid) return null;
 
   const name = asteroid.name;
@@ -19,7 +21,7 @@ const AsteroidCard = ({ asteroid }) => {
         <p>📅 Approach Date: {date}</p>
         <p>🚀 Speed: {speed} km/h</p>
         {hazard && <p>🚨 Potentially Hazardous ⚠️</p>}
-        <p> 
+        <p>
           ✨ More info{" "}
           <a
             href={url}
@@ -27,16 +29,16 @@ const AsteroidCard = ({ asteroid }) => {
             rel="noopener noreferrer"
             className="text-violet font-bold"
             style={{ textShadow: "0 0 5px rgba(255, 255, 255, 0.3)" }}
-          >here :3</a>
-           
+          >
+            here :3
+          </a>
         </p>
       </div>
     </div>
   );
-}
+};
 
-
-export default AsteroidCard
+export default AsteroidCard;
 
 // notes:
 
