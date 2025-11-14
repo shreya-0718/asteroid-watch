@@ -6,26 +6,27 @@ import * as THREE from 'three';
 function AsteroidMesh({ diameter, hazard }) {
   const mesh = useRef();
   const color = hazard ? 'orange' : 'gray';
-  const scale = Math.min(Math.max(diameter / 2, 0.5), 2);
+  const scale = Math.min(Math.max(diameter, 0.01), 2);
+  const exaggeration = 6;
 
   useFrame(() => {
     if (mesh.current) {
-      mesh.current.rotation.y += 0.005;
-      mesh.current.rotation.x += 0.002;
+      mesh.current.rotation.y += 0.01;
+      mesh.current.rotation.x += 0.02;
     }
   });
 
   useEffect(() => {
     if (mesh.current) {
       mesh.current.material.color.set(color);
-      mesh.current.scale.setScalar(scale);
+      mesh.current.scale.setScalar(scale*exaggeration);
     }
     console.log("asteroid mounted!");
   }, [diameter, hazard]);
 
   return (
     <mesh ref={mesh}>
-      <icosahedronGeometry args={[1, 0]} />
+      <icosahedronGeometry args={[2, 0]} />
       <meshStandardMaterial color={color} />
     </mesh>
   );

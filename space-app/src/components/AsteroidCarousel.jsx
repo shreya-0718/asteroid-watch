@@ -44,17 +44,19 @@ function AsteroidCarousel() {
     asteroids[currentSlide]?.estimated_diameter?.kilometers?.estimated_diameter_max || 1
   );
 
+  console.log(`updating asteroid with diamter ${diameter} for`)
+
   return (
-    <div className="flex flex-col md:flex-row items-stretch gap-4 w-full max-w-3xl">
+    <div className="flex flex-col md:flex-row items-center items-stretch gap-4 w-full max-w-3xl">
       <Carousel
-        beforeChange={(previousSlide, nextSlide) => setCurrentSlide(nextSlide)}
+        afterChange={(currentSlide) => setCurrentSlide(currentSlide)}
         className="flex-1"
         swipeable
         customDot={<CustomDots/>}
         draggable={false}
         showDots
         responsive={responsive}
-        ssr
+        ssr={false}
         infinite
         autoPlay={auto}
         keyBoardControl
@@ -72,15 +74,11 @@ function AsteroidCarousel() {
           <div className="text-center p-10">Loading asteroids…</div>
         )}
       </Carousel>
-
-      <div className="w-full flex justify-center mt-4">
-        <div
-          id="asteroid-slot"
-          className="w-[200px] h-[200px] relative overflow-hidden bg-blush rounded-xl"
-        />
+      
+      <div className="bg-blush max-w-[30vw] max-h-[30vw] justify-center">
+        <Asteroid diameter={diameter} hazard={false}/>
       </div>
 
-      <AsteroidPortal/>
     </div>
   );
 }
