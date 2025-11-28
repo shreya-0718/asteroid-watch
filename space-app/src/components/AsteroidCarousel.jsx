@@ -46,9 +46,13 @@ function AsteroidCarousel() {
     asteroids[currentSlide]?.estimated_diameter?.kilometers?.estimated_diameter_max || 0.05
   );
 
+  const speed = Number(
+    asteroids[currentSlide]?.close_approach_data?.[0]?.relative_velocity?.kilometers_per_hour || 0
+  );
+
   const activeAsteroid = asteroids[currentSlide];
 
-  console.log(`updating asteroid with diamter ${diameter} for`)
+  console.log(`updating asteroid with diamter ${diameter} for ${speed}`)
   console.log("Current slide:", currentSlide);
   console.log("Asteroid shown:", asteroids[currentSlide]?.name);
 
@@ -84,10 +88,11 @@ function AsteroidCarousel() {
         )}
       </Carousel>
       
-      <div className="bg-blush max-w-[30vw] max-h-[30vw] justify-center">
+      <div className="bg-white bg-opacity-50 p-6 rounded-2xl border border-white max-w-[30vw] max-h-[30vw] justify-center">
         <Asteroid
-          diameter={Number(activeAsteroid?.estimated_diameter?.kilometers?.estimated_diameter_max || 0.05)}
+          diameter={(diameter || 0.05)}
           hazard={activeAsteroid?.is_potentially_hazardous_asteroid}
+          speed={(speed || 0)}
         />
       </div>
 
