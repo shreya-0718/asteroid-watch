@@ -50,7 +50,7 @@ function AsteroidCarousel() {
   return (
     <div className="flex flex-col md:flex-row items-center items-stretch gap-4 w-full max-w-3xl">
       <Carousel
-        afterChange={(currentSlide) => setCurrentSlide(currentSlide)}
+        beforeChange={(currentSlide) => setCurrentSlide(currentSlide)}
         className="flex-1"
         swipeable
         customDot={<CustomDots/>}
