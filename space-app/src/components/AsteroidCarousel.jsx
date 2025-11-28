@@ -37,7 +37,6 @@ function AsteroidCarousel() {
         const allAsteroids = Object.values(data.near_earth_objects).flat();
         setAsteroids(allAsteroids);
       });
-      console.log(currentSlide);
 
 
   }, []);
@@ -51,10 +50,6 @@ function AsteroidCarousel() {
   );
 
   const activeAsteroid = asteroids[currentSlide];
-
-  console.log(`updating asteroid with diamter ${diameter} for ${speed}`)
-  console.log("Current slide:", currentSlide);
-  console.log("Asteroid shown:", asteroids[currentSlide]?.name);
 
   return (
     <div className="flex flex-col md:flex-row items-center items-stretch gap-4 w-full max-w-3xl">

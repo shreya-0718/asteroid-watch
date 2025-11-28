@@ -23,7 +23,6 @@ function AsteroidMesh({ diameter, hazard , speed }) {
       mesh.current.material.color.set(color);
       mesh.current.scale.setScalar(scale*exaggeration);
     }
-    console.log("asteroid mounted!: ");
   }, [diameter, hazard]);
 
   return (
