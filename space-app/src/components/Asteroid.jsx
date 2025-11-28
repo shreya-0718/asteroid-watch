@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 function AsteroidMesh({ diameter, hazard , speed }) {
   const mesh = useRef();
-  const color = hazard ? 'orange' : 'gray';
+  const color = hazard ? 'red' : 'gray';
   const scale = Math.min(Math.max(diameter, 0.01), 0.4);
   const exaggeration = 3;
   const rotation_speed = Math.min(Math.max(speed / 10000, 0.1), 5);
