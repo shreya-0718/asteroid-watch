@@ -4,7 +4,6 @@ import AsteroidCard from "./AsteroidCard";
 import CustomDots from "./CustomDots"
 import React, { useState, useEffect } from "react";
 import Asteroid from "./Asteroid";
-import AsteroidPortal from "./AsteroidPortal";
 
 const responsive = {
   desktop: {
@@ -38,10 +37,12 @@ function AsteroidCarousel() {
         const allAsteroids = Object.values(data.near_earth_objects).flat();
         setAsteroids(allAsteroids);
       });
+      console.log(currentSlide);
+
   }, []);
 
   const diameter = Number(
-    asteroids[currentSlide]?.estimated_diameter?.kilometers?.estimated_diameter_max || 1
+    asteroids[currentSlide]?.estimated_diameter?.kilometers?.estimated_diameter_max || 0.05
   );
 
   console.log(`updating asteroid with diamter ${diameter} for`)
@@ -76,7 +77,7 @@ function AsteroidCarousel() {
       </Carousel>
       
       <div className="bg-blush max-w-[30vw] max-h-[30vw] justify-center">
-        <Asteroid diameter={diameter} hazard={false}/>
+        <Asteroid diameter={diameter} hazard={false} slide={currentSlide}/>
       </div>
 
     </div>

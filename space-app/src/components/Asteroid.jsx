@@ -3,10 +3,10 @@ import { OrbitControls } from '@react-three/drei';
 import { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 
-function AsteroidMesh({ diameter, hazard }) {
+function AsteroidMesh({ diameter, hazard , current }) {
   const mesh = useRef();
   const color = hazard ? 'orange' : 'gray';
-  const scale = Math.min(Math.max(diameter, 0.01), 2);
+  const scale = Math.min(Math.max(diameter, 0.01), 0.3);
   const exaggeration = 6;
 
   useFrame(() => {
@@ -21,7 +21,7 @@ function AsteroidMesh({ diameter, hazard }) {
       mesh.current.material.color.set(color);
       mesh.current.scale.setScalar(scale*exaggeration);
     }
-    console.log("asteroid mounted!");
+    console.log("asteroid mounted!: ");
   }, [diameter, hazard]);
 
   return (
